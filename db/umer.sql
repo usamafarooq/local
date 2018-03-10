@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2018 at 08:24 AM
+-- Generation Time: Mar 10, 2018 at 07:49 PM
 -- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.23
+-- PHP Version: 5.6.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `client` (
   `id` int(11) UNSIGNED NOT NULL,
+  `main_id` int(11) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `Address` text,
   `Phone` int(100) DEFAULT NULL,
@@ -40,8 +41,8 @@ CREATE TABLE `client` (
 -- Dumping data for table `client`
 --
 
-INSERT INTO `client` (`id`, `Name`, `Address`, `Phone`, `Email`, `user_id`, `created_at`) VALUES
-(1, 'Umer', 'xyz', 2147483647, 'umer@gmail.com', 2, '2018-03-09 07:13:25');
+INSERT INTO `client` (`id`, `main_id`, `Name`, `Address`, `Phone`, `Email`, `user_id`, `created_at`) VALUES
+(2, 29, 'Talha', 'xyz', 12345678, 'text@test.com', 2, '2018-03-10 18:29:49');
 
 -- --------------------------------------------------------
 
@@ -63,7 +64,8 @@ CREATE TABLE `deliver_order` (
 --
 
 INSERT INTO `deliver_order` (`id`, `order_id`, `date`, `deliver`, `received`, `created_at`) VALUES
-(1, 1, '2018-03-10', 20, 5, '2018-03-10 05:23:21');
+(2, 2, '2018-03-11', 20, 0, '2018-03-10 18:33:42'),
+(3, 3, '0000-00-00', 10, 10, '2018-03-10 18:36:32');
 
 -- --------------------------------------------------------
 
@@ -155,6 +157,7 @@ CREATE TABLE `orders` (
   `Client` int(11) NOT NULL,
   `Rider` int(11) NOT NULL,
   `Quantity` int(100) NOT NULL,
+  `Price` int(11) NOT NULL,
   `Date` date NOT NULL,
   `user_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -164,8 +167,9 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `Client`, `Rider`, `Quantity`, `Date`, `user_id`, `created_at`) VALUES
-(1, 1, 28, 20, '2018-03-10', 2, '2018-03-09 07:15:19');
+INSERT INTO `orders` (`id`, `Client`, `Rider`, `Quantity`, `Price`, `Date`, `user_id`, `created_at`) VALUES
+(2, 2, 28, 20, 400, '2018-03-11', 2, '2018-03-10 18:32:09'),
+(3, 2, 28, 10, 200, '2018-03-11', 2, '2018-03-10 18:34:06');
 
 -- --------------------------------------------------------
 
@@ -201,7 +205,14 @@ INSERT INTO `permission` (`id`, `module_id`, `user_id`, `user_type_id`, `view`, 
 (212, 7, 2, 1, 1, 1, 1, 1, 1, 1),
 (213, 20, 2, 1, 1, 1, 1, 1, 1, 1),
 (214, 21, 2, 1, 1, 1, 1, 1, 1, 1),
-(215, 22, 2, 1, 1, 1, 1, 1, 1, 1);
+(215, 22, 2, 1, 1, 1, 1, 1, 1, 1),
+(216, 2, 2, 16, 0, 0, 0, 0, 0, 0),
+(217, 3, 2, 16, 0, 0, 0, 0, 0, 0),
+(218, 5, 2, 16, 0, 0, 0, 0, 0, 0),
+(219, 7, 2, 16, 0, 0, 0, 0, 0, 0),
+(220, 20, 2, 16, 0, 0, 0, 0, 0, 0),
+(221, 21, 2, 16, 1, 0, 1, 0, 0, 0),
+(222, 22, 2, 16, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -223,7 +234,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`) VALUES
 (2, 'admin', 'admin@gmail.com', 'e6e061838856bf47e1de730719fb2609', 1),
-(28, 'Usama', 'usama@gmail.com', '565074f3b5673ee26da150d2ff933e76', 15);
+(28, 'Usama', 'usama@gmail.com', '565074f3b5673ee26da150d2ff933e76', 15),
+(29, 'talha', 'text@test.com', '3cc3d06306939024863d20714195ad70', 16);
 
 -- --------------------------------------------------------
 
@@ -243,7 +255,8 @@ CREATE TABLE `user_type` (
 
 INSERT INTO `user_type` (`id`, `name`, `user_id`) VALUES
 (1, 'Admin', 2),
-(15, 'Rider', 2);
+(15, 'Rider', 2),
+(16, 'Client', 2);
 
 --
 -- Indexes for dumped tables
@@ -307,12 +320,12 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `deliver_order`
 --
 ALTER TABLE `deliver_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `modules`
 --
@@ -327,22 +340,22 @@ ALTER TABLE `modules_fileds`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `permission`
 --
 ALTER TABLE `permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `user_type`
 --
 ALTER TABLE `user_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
