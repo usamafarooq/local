@@ -55,10 +55,12 @@
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
 													?>
 													<td>
+														<a href="<?php echo base_url() ?>client/order_history/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="Order History" alt="Order History" width="35" height="35"></a>
+														<a href="#" data-toggle="modal" data-target="#myModal"><img src="<?php echo base_url() ?>assets/record1.png" title="Add Invoice" alt="Add Invoice" width="35" height="35"></a>
 														<?php 
 															if ($permission["edit"] == "1") {
 														?>
-														<a href="<?php echo base_url() ?>client/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="35" height="35"></a>
+														<a href="<?php echo base_url() ?>client/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="Edit" alt="Edit" width="35" height="35"></a>
 														<?php } ?>
 														<?php 
 															if ($permission["deleted"] == "1") {
@@ -85,6 +87,25 @@
 
 
 
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 

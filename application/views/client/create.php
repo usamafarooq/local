@@ -53,6 +53,16 @@
 
                                     </div><div class="form-group row">
 
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Username</label>
+                                        <div class="col-sm-9"><input class="form-control" name="username" type="text" value="" id="example-text-input" placeholder="" ></div>
+
+                                    </div><div class="form-group row">
+
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Password</label>
+                                        <div class="col-sm-9"><input class="form-control" name="password" type="password" value="" id="example-text-input" placeholder="" ></div>
+
+                                    </div><div class="form-group row">
+
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary pull-right">Add</button>
                                 </div>
