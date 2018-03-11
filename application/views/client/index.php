@@ -56,7 +56,8 @@
 													?>
 													<td>
 														<a href="<?php echo base_url() ?>client/order_history/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="Order History" alt="Order History" width="35" height="35"></a>
-														<a href="#" data-toggle="modal" data-target="#myModal"><img src="<?php echo base_url() ?>assets/record1.png" title="Add Invoice" alt="Add Invoice" width="35" height="35"></a>
+														<a href="#" data-toggle="modal" data-target="#myModal" onclick="get_id(<?php echo $module["id"] ?>)"><img src="<?php echo base_url() ?>assets/record1.png" title="Add Invoice" alt="Add Invoice" width="35" height="35"></a>
+														<a href="<?php echo base_url() ?>client/payment_history/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="Payment History" alt="Payment History" width="35" height="35"></a>
 														<?php 
 															if ($permission["edit"] == "1") {
 														?>
@@ -86,7 +87,8 @@
 		<!-- START CORE PLUGINS -->
 
 
-
+<form method="post" action="<?php echo base_url('client/invoice') ?>">
+	<input type="hidden" name="client_id" id="id">
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -95,17 +97,26 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h4 class="modal-title">Add Invoice</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <div class="row form-group">
+        	<label>Amount</label>
+        	<input type="number" name="amount" class="form-control">
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-info">Submit</button>
       </div>
     </div>
 
   </div>
 </div>
+</form>
 
-
+<script type="text/javascript">
+	function get_id(id) {
+		$('#id').val(id)
+	}
+</script>

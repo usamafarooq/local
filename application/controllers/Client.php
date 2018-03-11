@@ -99,4 +99,37 @@ class Client extends MY_Controller{
 		$this->data['orders'] = $this->Client_model->get_order_history($id);
 		$this->load->template('client/order',$this->data);
 	}
+
+	public function invoice()
+	{
+		if ( $this->permission['edit'] == '0') 
+		{
+			redirect('home');
+		}
+		$data = $this->input->post();
+		$id = $this->Client_model->insert('payment',$data);
+		if ($id) {
+			redirect('client');
+		}
+	}
+
+	public function payment_history($id)
+	{
+		if ( $this->permission['view'] == '0' && $this->permission['view_all'] == '0' ) 
+		{
+			redirect('home');
+		}
+		$this->data['title'] = 'Payments';
+		$this->data['client'] = $this->Client_model->get_row_single('client',array('id'=>$id));
+		$orders = $this->Client_model->get_payment_history($id);
+		$paid = $this->Client_model->get_paid_history($id);
+		$this->data['history'] = array_merge($orders,$paid); 
+		function compareOrder($a, $b)
+		{
+		  return strtotime($a['date']) - strtotime($b['date']);
+		}
+		usort($this->data['history'], 'compareOrder');
+		//echo '<pre>';print_r($this->data['history']);die;
+		$this->load->template('client/payment',$this->data);
+	}
 }

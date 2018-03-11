@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2018 at 07:49 PM
+-- Generation Time: Mar 11, 2018 at 01:52 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -65,7 +65,7 @@ CREATE TABLE `deliver_order` (
 
 INSERT INTO `deliver_order` (`id`, `order_id`, `date`, `deliver`, `received`, `created_at`) VALUES
 (2, 2, '2018-03-11', 20, 0, '2018-03-10 18:33:42'),
-(3, 3, '0000-00-00', 10, 10, '2018-03-10 18:36:32');
+(3, 3, '2018-03-09', 10, 10, '2018-03-11 00:44:01');
 
 -- --------------------------------------------------------
 
@@ -94,7 +94,9 @@ INSERT INTO `modules` (`id`, `name`, `main_name`, `sort`, `icon`, `url`, `user_i
 (7, 'Users', 'user', 3, 'home', 'users', 2),
 (20, 'Client', 'client', 5, 'home', 'client', 2),
 (21, 'Orders', 'orders', 6, 'home', 'orders', 2),
-(22, 'Reporting', 'reporting', 7, 'home', 'reporting', 2);
+(22, 'Order Reporting', 'reporting', 7, 'home', 'reporting', 2),
+(23, 'Pending Bottles', 'pending_bottles', 8, 'home', 'pending_bottles', 2),
+(24, 'Rider Report', 'rider_reporting', 9, 'home', 'rider_reporting', 2);
 
 -- --------------------------------------------------------
 
@@ -169,7 +171,27 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `Client`, `Rider`, `Quantity`, `Price`, `Date`, `user_id`, `created_at`) VALUES
 (2, 2, 28, 20, 400, '2018-03-11', 2, '2018-03-10 18:32:09'),
-(3, 2, 28, 10, 200, '2018-03-11', 2, '2018-03-10 18:34:06');
+(3, 2, 28, 10, 200, '2018-03-09', 2, '2018-03-11 00:10:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`id`, `client_id`, `amount`, `created_at`) VALUES
+(1, 2, 500, '2018-03-11 00:01:17');
 
 -- --------------------------------------------------------
 
@@ -199,20 +221,22 @@ INSERT INTO `permission` (`id`, `module_id`, `user_id`, `user_type_id`, `view`, 
 (195, 3, 2, 15, 0, 0, 0, 0, 0, 0),
 (196, 5, 2, 15, 0, 0, 0, 0, 0, 0),
 (197, 7, 2, 15, 0, 0, 0, 0, 0, 0),
-(209, 2, 2, 1, 1, 1, 1, 1, 1, 1),
-(210, 3, 2, 1, 1, 1, 1, 1, 1, 1),
-(211, 5, 2, 1, 1, 1, 1, 1, 1, 1),
-(212, 7, 2, 1, 1, 1, 1, 1, 1, 1),
-(213, 20, 2, 1, 1, 1, 1, 1, 1, 1),
-(214, 21, 2, 1, 1, 1, 1, 1, 1, 1),
-(215, 22, 2, 1, 1, 1, 1, 1, 1, 1),
 (216, 2, 2, 16, 0, 0, 0, 0, 0, 0),
 (217, 3, 2, 16, 0, 0, 0, 0, 0, 0),
 (218, 5, 2, 16, 0, 0, 0, 0, 0, 0),
 (219, 7, 2, 16, 0, 0, 0, 0, 0, 0),
 (220, 20, 2, 16, 0, 0, 0, 0, 0, 0),
 (221, 21, 2, 16, 1, 0, 1, 0, 0, 0),
-(222, 22, 2, 16, 0, 0, 0, 0, 0, 0);
+(222, 22, 2, 16, 0, 0, 0, 0, 0, 0),
+(231, 2, 2, 1, 1, 1, 1, 1, 1, 1),
+(232, 3, 2, 1, 1, 1, 1, 1, 1, 1),
+(233, 5, 2, 1, 1, 1, 1, 1, 1, 1),
+(234, 7, 2, 1, 1, 1, 1, 1, 1, 1),
+(235, 20, 2, 1, 1, 1, 1, 1, 1, 1),
+(236, 21, 2, 1, 1, 1, 1, 1, 1, 1),
+(237, 22, 2, 1, 1, 1, 1, 1, 1, 1),
+(238, 23, 2, 1, 1, 1, 1, 1, 1, 1),
+(239, 24, 2, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -293,6 +317,12 @@ ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `permission`
 --
 ALTER TABLE `permission`
@@ -330,7 +360,7 @@ ALTER TABLE `deliver_order`
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `modules_fileds`
 --
@@ -342,10 +372,15 @@ ALTER TABLE `modules_fileds`
 ALTER TABLE `orders`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `permission`
 --
 ALTER TABLE `permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
 --
 -- AUTO_INCREMENT for table `users`
 --
