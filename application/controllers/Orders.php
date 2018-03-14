@@ -43,6 +43,10 @@ class Orders extends MY_Controller{
 			redirect('home');
 		}
 		$data = $this->input->post();
+		$client = $this->Orders_model->get_row_single('client',array('id'=>$data['Client']));
+		$price = $client['Price'];
+		$price = $price * $data['Quantity'];
+		$data['Price'] = $price;
 		$data['user_id'] = $this->session->userdata('user_id');$id = $this->Orders_model->insert('orders',$data);
 		if ($id) {
 			redirect('orders');

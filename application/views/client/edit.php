@@ -54,6 +54,13 @@
 
                                     </div><div class="form-group row">
 
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Price</label>
+                                        <div class="col-sm-9">
+
+                                        <input class="form-control" name="Price" type="number" value="<?php echo $client["Price"] ?>" id="example-text-input" placeholder="" ></div>
+
+                                    </div><div class="form-group row">
+
                                 <label for="example-text-input" class="col-sm-3 col-form-label">Email</label>
                                         <div class="col-sm-9">
 
