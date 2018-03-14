@@ -56,12 +56,12 @@
                                 <label for="example-text-input" class="col-sm-3 col-form-label">Quantity<span class="required">*</span></label>
                                         <div class="col-sm-9"><input class="form-control" name="Quantity" type="number" value="" id="example-text-input" placeholder="" required=""></div>
 
-                                    </div><div class="form-group row">
+                                    </div><!-- <div class="form-group row">
 
                                 <label for="example-text-input" class="col-sm-3 col-form-label">Price<span class="required">*</span></label>
                                         <div class="col-sm-9"><input class="form-control" name="Price" type="number" value="" id="example-text-input" placeholder="" required=""></div>
 
-                                    </div><div class="form-group row">
+                                    </div> --><div class="form-group row">
 
                                 <label for="example-text-input" class="col-sm-3 col-form-label">Date<span class="required">*</span></label>
                                         <div class="col-sm-9"><input class="form-control" name="Date" type="date" value="" id="example-text-input" placeholder="" required=""></div>

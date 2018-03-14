@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2018 at 01:52 AM
+-- Generation Time: Mar 14, 2018 at 05:23 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -32,6 +32,7 @@ CREATE TABLE `client` (
   `Name` varchar(100) NOT NULL,
   `Address` text,
   `Phone` int(100) DEFAULT NULL,
+  `Price` int(100) NOT NULL,
   `Email` varchar(255) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -41,8 +42,8 @@ CREATE TABLE `client` (
 -- Dumping data for table `client`
 --
 
-INSERT INTO `client` (`id`, `main_id`, `Name`, `Address`, `Phone`, `Email`, `user_id`, `created_at`) VALUES
-(2, 29, 'Talha', 'xyz', 12345678, 'text@test.com', 2, '2018-03-10 18:29:49');
+INSERT INTO `client` (`id`, `main_id`, `Name`, `Address`, `Phone`, `Price`, `Email`, `user_id`, `created_at`) VALUES
+(2, 29, 'Talha', 'xyz', 12345678, 60, 'text@test.com', 2, '2018-03-14 16:23:10');
 
 -- --------------------------------------------------------
 
