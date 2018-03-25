@@ -27,6 +27,18 @@ class Orders_model extends MY_Model{
 		return $this->db->get()->result_array();
 	}
 
+	public function get_rider_history($id)
+	{
+		$this->db->select('orders.*,client.Name,client.Address,users.name,count(deliver_order.id) as sent')
+				 ->from('orders')
+				 ->join('deliver_order', 'deliver_order.order_id = orders.id', 'left')
+				 ->join('client', 'client.id = orders.Client')
+				 ->join('users', 'users.id = orders.Rider')
+				 ->group_by('orders.id')
+				 ->where('Rider',$id); 
+		return $this->db->get()->result_array();
+	}
+
 	public function get_client_orders($id)
 	{
 		$this->db->select('orders.*,client.Name,client.Address,users.name,count(deliver_order.id) as sent')

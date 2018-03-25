@@ -1,0 +1,113 @@
+<!-- <ion-side-menus>
+
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-positive nav-title-slide-ios7">
+      <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <header class="bar bar-header bar-stable">
+      <h1 class="title">Left</h1>
+    </header>
+    <ion-content class="has-header">
+      <ion-list>
+        <ion-item menu-close ng-click="login()">
+          Login
+        </ion-item>
+        <ion-item menu-close href="#/app/search">
+          Search
+        </ion-item>
+        <ion-item menu-close href="#/app/browse">
+          Browse
+        </ion-item>
+        <ion-item menu-close href="#/app/playlists">
+          Playlists
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus> -->
+
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content drag-content="true">
+    <ion-nav-bar class="bar-balanced" align-title="center">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu width="300" side="left">
+    <ion-content scroll="true">
+      <div class="top-sidebar-left" horizontal layout center>
+        <div class="avatar">
+          <img ng-src="{{pImageSrc}}" ng-if="user.p_img" class="img-response" width="80" height="80"/>
+          <img src="./img/avatar.png" ng-if="!user.p_img" class="img-response" width="80" height="80"/>
+        </div>
+        <div class="padding">
+          <div class="balanced bold">{{user.email}}</div>
+          <div>{{user.name}}</div>
+          <!-- <a class="button icon-left ion-android-create button-clear button-dark" ui-sref="app.setting" menu-close>edit profile</a> -->
+        </div>
+      </div>
+      <div class="list list-menu-left n-m" ng-if="role == 15">
+
+        <a class="item item-icon-left" ui-sref="app.home" ui-sref-active="balanced" menu-close>
+          <i class="icon ion-ios-home-outline"></i>
+          Home
+        </a>
+
+        <a class="item item-icon-left" ui-sref="app.client" ui-sref-active="balanced" menu-close>
+          <i class="icon ion-android-cart"></i>
+          Assign Client
+        </a>
+
+        <a class="item item-icon-left" ui-sref="app.order" ui-sref-active="balanced" menu-close>
+          <i class="icon ion-android-cart"></i>
+          Today Orders
+        </a>
+
+        <a class="item item-icon-left" ui-sref="app.order-history" ui-sref-active="balanced" menu-close>
+          <i class="icon ion-android-cart"></i>
+          Orders History
+        </a>
+
+        <a class="item item-icon-left assertive" ng-click="logout()" menu-close>
+          <i class="icon ion-log-out"></i>
+          Log Out
+        </a>
+
+      </div>
+       <div class="list list-menu-left n-m" ng-if="role == 16">
+
+        <a class="item item-icon-left" ui-sref="app.home" ui-sref-active="balanced" menu-close>
+          <i class="icon ion-ios-home-outline"></i>
+          Home
+        </a>
+
+        <a class="item item-icon-left" ui-sref="app.order" ui-sref-active="balanced" menu-close>
+          <i class="icon ion-android-cart"></i>
+          Orders
+        </a>
+
+        <a class="item item-icon-left" ui-sref="app.create-order" ui-sref-active="balanced" menu-close>
+          <i class="icon ion-android-add-circle"></i>
+          Create Order
+        </a>
+
+        <a class="item item-icon-left" ui-sref="app.payment" ui-sref-active="balanced" menu-close>
+          <i class="icon ion-cash"></i>
+          Payment History
+        </a>
+
+        <a class="item item-icon-left assertive" ng-click="logout()" menu-close>
+          <i class="icon ion-log-out"></i>
+          Log Out
+        </a>
+
+      </div>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

@@ -4,11 +4,11 @@
     </button>
   </ion-nav-buttons>
   <ion-nav-title>
-    Orders
+    Orders History
   </ion-nav-title>
 	<ion-content padding class="categories">
 	    <ion-list ng-repeat="order in orders" >
-			<ion-item ui-sref="app.detail({id:order.id})">
+			<ion-item  ui-sref="app.detail({id:order.id})">
 				<p style="position:absolute;right:10px;">
 				<a ng-if="order.sent == 0" ng-click="complete(order.id)" class="button button-balanced button-clear icon ion-android-add-circle"></a>
 				<a ng-if="order.sent > 0" class="button button-balanced button-clear icon ion-checkmark-circled"></a> 

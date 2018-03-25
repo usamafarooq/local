@@ -1,0 +1,31 @@
+<ion-view title="Home">
+	<ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()">
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    Home
+  </ion-nav-title>
+	<ion-content padding class="categories">
+        <div class="col-md-4 pending-users">
+            <i class="icon ion-android-cart"></i>
+            <div class="count-small">{{data.pending_bottles}}</div>
+            <div class="heading-small">Pending Bottels</div>
+        </div>
+        <div class="col-md-4 pending-users" ng-if="role==16">
+            <i class="icon ion-cash"></i>
+            <div class="count-small">{{data.pending_payment}}</div>
+            <div class="heading-small">Pending Payment</div>
+        </div>
+        <div class="col-md-4 pending-users">
+            <i class="icon ion-android-cart"></i>
+            <div class="count-small">{{data.total_order}}</div>
+            <div class="heading-small">Total Orders</div>
+        </div>
+        <div class="col-md-4 pending-users">
+            <i class="icon ion-android-cart"></i>
+            <div class="count-small">{{data.pending_order}}</div>
+            <div class="heading-small">Pending Orders</div>
+        </div>
+	</ion-content>
+</ion-view>

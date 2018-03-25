@@ -1,0 +1,21 @@
+<ion-view title="Payment History">
+	<ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()">
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    Payment History
+  </ion-nav-title>
+	<ion-content padding class="categories">
+        <div class="row header">
+          <div class="col">Date</div>
+          <div class="col">Amount</div>
+          <div class="col">Type</div>
+        </div>
+        <div class="row" ng-repeat="data in history">
+          <div class="col">{{data.date}}</div>
+          <div class="col">{{data.amount}}</div>
+          <div class="col">{{data.status}}</div>
+        </div>
+	</ion-content>
+</ion-view>

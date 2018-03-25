@@ -1,8 +1,15 @@
-<ion-view title="Orders">
+<ion-view title="Orders List">
+	<ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()">
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    Orders
+  </ion-nav-title>
 	<ion-content padding class="categories">
-		<ion-buttons right>
+		<!-- <ion-buttons right>
 	         <button class="button" ng-click="loadform()"><ion-icon class="button button-balanced button-clear icon ion-android-add-circle"></ion-icon> Create Order</button>
-	    </ion-buttons>
+	    </ion-buttons> -->
 	    <ion-list ng-repeat="order in orders" >
 			<ion-item>
 				<p style="position:absolute;right:10px;">

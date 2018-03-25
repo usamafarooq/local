@@ -5,11 +5,39 @@ class Orders extends CI_Controller{
     {
         parent::__construct();
         $this->load->model('Orders_model');
+        $this->load->model('Client_model');
     }
 
     public function index($id)
 	{
 		$data = $this->Orders_model->get_rider_orders($id,date('Y-m-d'));
+		echo json_encode($data);
+	}
+
+	public function history($id)
+	{
+		$data = $this->Orders_model->get_rider_history($id);
+		echo json_encode($data);
+	}
+
+	public function client($id)
+	{
+		$data = $this->Client_model->get_rider_client($id,date('Y-m-d'));
+		echo json_encode($data);
+	}
+
+	public function payment($id)
+	{
+		$client = $this->Orders_model->get_row_single('client',array('main_id'=>$id));
+        $id = $client['id'];
+		$orders = $this->Client_model->get_payment_history($id);
+		$paid = $this->Client_model->get_paid_history($id);
+		$data = array_merge($orders,$paid); 
+		function compareOrder($a, $b)
+		{
+		  return strtotime($a['date']) - strtotime($b['date']);
+		}
+		usort($data, 'compareOrder');
 		echo json_encode($data);
 	}
 
@@ -30,6 +58,19 @@ class Orders extends CI_Controller{
 		echo json_encode($data);
 	}
 
+	public function form($id,$rider)
+	{
+		$data = $this->Client_model->get_row_single('client',array('id'=>$id));
+		$pending = $this->Orders_model->get_pending($id);
+		$data['pending'] = $pending['pending'];
+		$peyment = $this->Orders_model->get_peyment($id);
+		$price = $this->Orders_model->get_price($id);
+		$data['peyment'] = $price['price'] - $peyment['amount'];
+		$data['rider'] = $rider;
+		$data['date'] = date('Y-m-d');
+		echo json_encode($data);
+	}
+
 	public function deliver()
 	{
 		$data = file_get_contents("php://input");
@@ -41,6 +82,33 @@ class Orders extends CI_Controller{
         $data['date'] = date('Y-m-d');
         $id = $this->Orders_model->insert('deliver_order',$data);
 	}
+
+	public function submit_order()
+	{
+		$data = file_get_contents("php://input");
+        $json = json_decode($data,true);
+        $data = array(
+        	'Client' => $json['client'],
+        	'Rider' => $json['rider'],
+        	'Quantity' => $json['deliver'],
+        	'Price' => $json['price'],
+        	'Date' => $json['date'],
+        	'user_id' => $json['rider'],
+        );
+        $order_id = $this->Orders_model->insert('orders',$data);
+        $data = array(
+        	'order_id'=>$order_id,
+        	'date'=>$json['date'],
+        	'deliver'=>$json['deliver'],
+        	'received'=>$json['received'],
+        );
+        $this->Orders_model->insert('deliver_order',$data);
+        $data = array(
+        	'client_id'=>$json['client'],
+        	'amount'=>$json['amount'],
+        );
+        $this->Orders_model->insert('payment',$data);
+    }
 
 	public function create_order()
 	{
