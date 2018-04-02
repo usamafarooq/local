@@ -25,4 +25,9 @@ class Client_model extends MY_Model{
 				 ->where('o.client_id',$id);
 		return $this->db->get()->result_array();
 	}
+
+	public function get_rider_client($id,$date)
+	{
+		return $this->db->query("SELECT `client`.* FROM `assign_rider` JOIN `users` ON `users`.`id` = `assign_rider`.`Rider` JOIN `client` on find_in_set(client.id,assign_rider.Client) where Rider = ".$id." and Date = '".$date."'")->result_array();
+	}
 }

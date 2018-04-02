@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2018 at 05:23 PM
+-- Generation Time: Mar 16, 2018 at 10:03 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -66,7 +66,7 @@ CREATE TABLE `deliver_order` (
 
 INSERT INTO `deliver_order` (`id`, `order_id`, `date`, `deliver`, `received`, `created_at`) VALUES
 (2, 2, '2018-03-11', 20, 0, '2018-03-10 18:33:42'),
-(3, 3, '2018-03-09', 10, 10, '2018-03-11 00:44:01');
+(3, 3, '2018-03-16', 10, 5, '2018-03-16 16:01:39');
 
 -- --------------------------------------------------------
 
@@ -171,8 +171,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `Client`, `Rider`, `Quantity`, `Price`, `Date`, `user_id`, `created_at`) VALUES
-(2, 2, 28, 20, 400, '2018-03-11', 2, '2018-03-10 18:32:09'),
-(3, 2, 28, 10, 200, '2018-03-09', 2, '2018-03-11 00:10:38');
+(2, 2, 28, 20, 400, '2018-03-16', 2, '2018-03-16 15:41:24'),
+(3, 2, 28, 10, 200, '2018-03-16', 2, '2018-03-16 15:41:36'),
+(4, 2, 0, 10, 600, '2018-03-17', 29, '2018-03-16 18:34:38');
 
 -- --------------------------------------------------------
 
@@ -371,7 +372,7 @@ ALTER TABLE `modules_fileds`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `payment`
 --

@@ -1,0 +1,43 @@
+<ion-view title="Orders Detail">
+	<ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()">
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    Order Detail
+  </ion-nav-title>
+    <ion-content padding="'true'" class="has-header">
+        <div>
+            <p>Total :
+                <strong>Rs.{{order.peyment}}</strong>
+            </p>
+            <p>Pending Bottles :
+                <strong>{{order.pending}}</strong>
+            </p>
+        </div>
+		<button ng-if="order.sent == 0" ng-click="deliver()" class="button button-positive button-block ">Deliver</button>
+		<div>
+			<div class="list card" >
+				<div class="item item-divider">{{order.Name}} </div>
+				<div class="item item-body">
+					<div>
+						<p>Price: Rs.{{order.Price}}</p>
+						<p>Quantity: {{order.Quantity}}</p>
+						<p>Address: {{order.Address}}</p>
+						<ion-list ng-if="order.sent == 0">
+				            <label class="item item-input">
+				                <span class="input-label">Deliver</span>
+				                <input ng-model="item.id" type="hidden" placeholder="" value="{{order.id}}">
+				                <input ng-model="item.deliver" max="{{order.Quantity}}"  type="number" placeholder="" >
+				            </label>
+				            <label class="item item-input">
+				                <span class="input-label">Received</span>
+				                <input ng-model="item.received" type="number" max="{{order.pending}}" placeholder="">
+				            </label>
+				        </ion-list>
+					</div>
+				</div>
+			</div>
+		</div>
+    </ion-content>
+</ion-view>

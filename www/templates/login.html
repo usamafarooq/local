@@ -1,0 +1,54 @@
+<!-- <ion-view title="Login">
+    <ion-content padding="'true'" class="has-header">
+        <form class="list" >
+            <ion-list>
+                <label class="item item-input">
+                    <span class="input-label">Email</span>
+          
+                    <input ng-model="user.email" type="email" placeholder="" >
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Password</span>
+          
+                    <input ng-model="user.password" type="password" placeholder="">
+                </label>
+            </ion-list>
+            <div class="spacer" style="height: 40px;"></div>
+      
+            <button  class="button button-stable button-block " ng-click="login()" >Log in</button>
+      
+        </form>
+    </ion-content>
+</ion-view> -->
+<ion-view view-title="Login" align-title="left">
+    <ion-content class="loginContentStyle">
+        <div class="hero no-header flat">
+            <div class="content">
+                {{err}}
+                <div class="app-icon"></div>
+                <center><h1>Webewox</h1></center>
+            </div>
+        </div>
+        <ion-list>
+            <label class="item item-input">
+                <span class="input-label">Email</span>
+      
+                <input ng-model="user.email" type="email" placeholder="" >
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Password</span>
+      
+                <input ng-model="user.password" type="password" placeholder="">
+            </label>
+        </ion-list>
+        
+        <div class="padding">
+            <button class="button button-full button-positive ink" ng-click="login()">Login</button>
+            <!-- <button class="button button-full button-positive ink" ng-click="logoutUser()">Logout</button> -->
+            <!-- <button class="button button-full icon-left ion-social-facebook button-positive-900 ink" ng-click="oauthLogin('facebook')">Facebook login</button>
+            <button class="button button-full icon-left ion-social-google button-assertive-900 ink" ng-click="oauthLogin('google')">Google login</button> -->
+            <!-- <button class="button button-full icon-left ion-social-twitter button-calm ink" ng-click="oauthLogin('twitter')">Twitter login</button> -->
+            <!-- <button class="button button-full button-energized" style="color:black;" ng-click="testAppWithoutLogin()">Try the app without login</button> -->
+        </div>
+    </ion-content>
+</ion-view>
