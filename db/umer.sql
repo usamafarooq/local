@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2018 at 10:03 PM
+-- Generation Time: Apr 03, 2018 at 10:24 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -19,6 +19,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `umer`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assign_rider`
+--
+
+CREATE TABLE `assign_rider` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `Date` date DEFAULT NULL,
+  `Rider` int(11) DEFAULT NULL,
+  `Client` varchar(500) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `assign_rider`
+--
+
+INSERT INTO `assign_rider` (`id`, `Date`, `Rider`, `Client`, `user_id`, `created_at`) VALUES
+(1, '2018-03-25', 28, '2,3', 2, '2018-03-25 13:14:00');
 
 -- --------------------------------------------------------
 
@@ -43,7 +65,8 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id`, `main_id`, `Name`, `Address`, `Phone`, `Price`, `Email`, `user_id`, `created_at`) VALUES
-(2, 29, 'Talha', 'xyz', 12345678, 60, 'text@test.com', 2, '2018-03-14 16:23:10');
+(2, 29, 'Talha', 'xyz', 12345678, 60, 'text@test.com', 2, '2018-03-14 16:23:10'),
+(3, 30, 'umer', 'xyz', 123455656, 90, 'umer@gmail.com', 2, '2018-03-25 12:59:18');
 
 -- --------------------------------------------------------
 
@@ -66,7 +89,8 @@ CREATE TABLE `deliver_order` (
 
 INSERT INTO `deliver_order` (`id`, `order_id`, `date`, `deliver`, `received`, `created_at`) VALUES
 (2, 2, '2018-03-11', 20, 0, '2018-03-10 18:33:42'),
-(3, 3, '2018-03-16', 10, 5, '2018-03-16 16:01:39');
+(3, 3, '2018-03-16', 10, 5, '2018-03-16 16:01:39'),
+(4, 5, '2018-03-25', 20, 10, '2018-03-25 19:17:10');
 
 -- --------------------------------------------------------
 
@@ -97,7 +121,8 @@ INSERT INTO `modules` (`id`, `name`, `main_name`, `sort`, `icon`, `url`, `user_i
 (21, 'Orders', 'orders', 6, 'home', 'orders', 2),
 (22, 'Order Reporting', 'reporting', 7, 'home', 'reporting', 2),
 (23, 'Pending Bottles', 'pending_bottles', 8, 'home', 'pending_bottles', 2),
-(24, 'Rider Report', 'rider_reporting', 9, 'home', 'rider_reporting', 2);
+(24, 'Rider Report', 'rider_reporting', 9, 'home', 'rider_reporting', 2),
+(25, 'Assign Rider', 'assign_rider', 5, 'home', 'assign_rider', 2);
 
 -- --------------------------------------------------------
 
@@ -147,7 +172,13 @@ INSERT INTO `modules_fileds` (`id`, `name`, `type`, `filed_type`, `options`, `fi
 (19, 'Client', 'INT', 'input', '', 'no', 11, 1, 21, 1, 'id', 'client', 'Name,Address'),
 (20, 'Rider', 'INT', 'input', '', 'no', 11, 1, 21, 1, 'id', 'users', 'name'),
 (21, 'Quantity', 'INT', 'input', '', 'no', 100, 1, 21, 0, NULL, NULL, NULL),
-(22, 'Date', 'DATE', 'input', '', 'no', 100, 1, 21, 0, NULL, NULL, NULL);
+(22, 'Date', 'DATE', 'input', '', 'no', 100, 1, 21, 0, NULL, NULL, NULL),
+(23, 'Date', 'DATE', 'input', '', 'no', 100, 0, 25, 0, NULL, NULL, NULL),
+(24, 'Rider', 'INT', 'input', '', 'no', 11, 0, 25, 1, 'id', 'users', 'name'),
+(25, 'Client', 'VARCHAR', 'input', '', 'no', 500, 0, 25, 1, 'id', 'client', 'Name'),
+(26, 'Date', 'DATE', 'input', '', 'no', 11, 1, 25, 0, NULL, NULL, NULL),
+(27, 'Rider', 'INT', 'input', '', 'no', 11, 1, 25, 1, 'id', 'users', 'name'),
+(28, 'Client', 'VARCHAR', 'input', '', 'no', 500, 1, 25, 1, 'id', 'client', 'Name');
 
 -- --------------------------------------------------------
 
@@ -173,7 +204,8 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `Client`, `Rider`, `Quantity`, `Price`, `Date`, `user_id`, `created_at`) VALUES
 (2, 2, 28, 20, 400, '2018-03-16', 2, '2018-03-16 15:41:24'),
 (3, 2, 28, 10, 200, '2018-03-16', 2, '2018-03-16 15:41:36'),
-(4, 2, 0, 10, 600, '2018-03-17', 29, '2018-03-16 18:34:38');
+(4, 2, 0, 10, 600, '2018-03-17', 29, '2018-03-16 18:34:38'),
+(5, 2, 28, 20, 1200, '2018-03-25', 28, '2018-03-25 19:17:10');
 
 -- --------------------------------------------------------
 
@@ -193,7 +225,8 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`id`, `client_id`, `amount`, `created_at`) VALUES
-(1, 2, 500, '2018-03-11 00:01:17');
+(1, 2, 500, '2018-03-11 00:01:17'),
+(2, 2, 500, '2018-03-25 19:17:10');
 
 -- --------------------------------------------------------
 
@@ -230,15 +263,16 @@ INSERT INTO `permission` (`id`, `module_id`, `user_id`, `user_type_id`, `view`, 
 (220, 20, 2, 16, 0, 0, 0, 0, 0, 0),
 (221, 21, 2, 16, 1, 0, 1, 0, 0, 0),
 (222, 22, 2, 16, 0, 0, 0, 0, 0, 0),
-(231, 2, 2, 1, 1, 1, 1, 1, 1, 1),
-(232, 3, 2, 1, 1, 1, 1, 1, 1, 1),
-(233, 5, 2, 1, 1, 1, 1, 1, 1, 1),
-(234, 7, 2, 1, 1, 1, 1, 1, 1, 1),
-(235, 20, 2, 1, 1, 1, 1, 1, 1, 1),
-(236, 21, 2, 1, 1, 1, 1, 1, 1, 1),
-(237, 22, 2, 1, 1, 1, 1, 1, 1, 1),
-(238, 23, 2, 1, 1, 1, 1, 1, 1, 1),
-(239, 24, 2, 1, 1, 1, 1, 1, 1, 1);
+(240, 2, 2, 1, 1, 1, 1, 1, 1, 1),
+(241, 3, 2, 1, 1, 1, 1, 1, 1, 1),
+(242, 5, 2, 1, 1, 1, 1, 1, 1, 1),
+(243, 7, 2, 1, 1, 1, 1, 1, 1, 1),
+(244, 20, 2, 1, 1, 1, 1, 1, 1, 1),
+(245, 21, 2, 1, 1, 1, 1, 1, 1, 1),
+(246, 22, 2, 1, 1, 1, 1, 1, 1, 1),
+(247, 23, 2, 1, 1, 1, 1, 1, 1, 1),
+(248, 24, 2, 1, 1, 1, 1, 1, 1, 1),
+(249, 25, 2, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -261,7 +295,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`) VALUES
 (2, 'admin', 'admin@gmail.com', 'e6e061838856bf47e1de730719fb2609', 1),
 (28, 'Usama', 'usama@gmail.com', '565074f3b5673ee26da150d2ff933e76', 15),
-(29, 'talha', 'text@test.com', '3cc3d06306939024863d20714195ad70', 16);
+(29, 'talha', 'text@test.com', '3cc3d06306939024863d20714195ad70', 16),
+(30, 'umer', 'umer@gmail.com', '6a8d11f37a9ece9ebc851ea11331160e', 16);
 
 -- --------------------------------------------------------
 
@@ -287,6 +322,12 @@ INSERT INTO `user_type` (`id`, `name`, `user_id`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `assign_rider`
+--
+ALTER TABLE `assign_rider`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `client`
@@ -349,45 +390,50 @@ ALTER TABLE `user_type`
 --
 
 --
+-- AUTO_INCREMENT for table `assign_rider`
+--
+ALTER TABLE `assign_rider`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `deliver_order`
 --
 ALTER TABLE `deliver_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `modules_fileds`
 --
 ALTER TABLE `modules_fileds`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `permission`
 --
 ALTER TABLE `permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=250;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `user_type`
 --
