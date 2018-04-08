@@ -80,7 +80,7 @@
         </a>
 
       </div>
-       <div class="list list-menu-left n-m" ng-if="role == 16">
+      <div class="list list-menu-left n-m" ng-if="role == 16">
 
         <a class="item item-icon-left" ui-sref="app.home" ui-sref-active="balanced" menu-close>
           <i class="icon ion-ios-home-outline"></i>
@@ -100,6 +100,35 @@
         <a class="item item-icon-left" ui-sref="app.payment" ui-sref-active="balanced" menu-close>
           <i class="icon ion-cash"></i>
           Payment History
+        </a>
+
+        <a class="item item-icon-left assertive" ng-click="logout()" menu-close>
+          <i class="icon ion-log-out"></i>
+          Log Out
+        </a>
+
+      </div>
+
+      <div class="list list-menu-left n-m" ng-if="role != 15 && role != 16">
+
+        <a class="item item-icon-left" ui-sref="app.home" ui-sref-active="balanced" menu-close>
+          <i class="icon ion-ios-home-outline"></i>
+          Home
+        </a>
+
+        <a class="item item-icon-left" ui-sref="app.client" ui-sref-active="balanced" menu-close>
+          <i class="icon ion-android-cart"></i>
+          Assign Client
+        </a>
+
+        <a class="item item-icon-left" ui-sref="app.order" ui-sref-active="balanced" menu-close>
+          <i class="icon ion-android-cart"></i>
+          Today Orders
+        </a>
+
+        <a class="item item-icon-left" ui-sref="app.order-history" ui-sref-active="balanced" menu-close>
+          <i class="icon ion-android-cart"></i>
+          Orders History
         </a>
 
         <a class="item item-icon-left assertive" ng-click="logout()" menu-close>

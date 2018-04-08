@@ -108,6 +108,22 @@ class Orders extends CI_Controller{
         	'amount'=>$json['amount'],
         );
         $this->Orders_model->insert('payment',$data);
+        $data =array(
+        	'deliver' => $json['deliver'],
+        	'received'=>$json['received'],
+        	'price' => $json['price'],
+        	'date' => $json['date'],
+        	'code' => $json['client'],
+        );
+        $id = $json['client'];
+        $pending = $this->Orders_model->get_pending($id);
+		$data['pending'] = $pending['pending'];
+		$peyment = $this->Orders_model->get_peyment($id);
+		$price = $this->Orders_model->get_price($id);
+		$data['peyment'] = $price['price'] - $peyment['amount'];
+		$client = $this->Client_model->get_row_single('client',array('id'=>$id));
+		$data['name'] = $client['Name'];
+		echo json_encode($data);
     }
 
 	public function create_order()

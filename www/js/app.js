@@ -1,6 +1,7 @@
 var app = angular.module('local', ['ionic', 'LocalStorageModule']);
 var api = 'http://localhost/local/api/';
-app.run(function($ionicPlatform) {
+var home = 0
+app.run(function($state, $stateParams,$ionicPlatform) {
     $ionicPlatform.ready(function() {
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -15,6 +16,10 @@ app.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvi
     localStorageServiceProvider.setStorageType('sessionStorage');
     $stateProvider.state('login', {
             url: '/login',
+            templateUrl: 'templates/login.html',
+            controller: 'loginCtrl'
+        }).state('main', {
+            url: '/',
             templateUrl: 'templates/login.html',
             controller: 'loginCtrl'
         }).state('app.detail', {
@@ -68,6 +73,14 @@ app.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvi
                 'menuContent': {
                     templateUrl: 'templates/orderform.html',
                     controller: 'orderformCtrl'
+                }
+            }
+        }).state('app.singleorder', {
+            url: '/singleorder/',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/singleorder.html',
+                    controller: 'singleorderCtrl'
                 }
             }
         }).state('app.home', {
@@ -125,10 +138,12 @@ app.controller('AppCtrl', function($scope, $http, $ionicPopup, $state, $ionicHis
     });
 });
 app.controller('loginCtrl', function($scope, $http, $ionicPopup, $state, $ionicHistory, localStorageService) {
-    $state.go('app.home', {}, {
-        location: "replace",
-        reload: true
-    });
+    if (localStorageService.get('id') != null) {
+        $state.go('app.home', {}, {
+            location: "replace",
+            reload: true
+        });
+    }
     // if (localStorageService.get('id') != null && localStorageService.get('role') == 15) {
     //     $state.go('app.order', {}, {
     //         location: "replace",
@@ -178,6 +193,7 @@ app.controller('loginCtrl', function($scope, $http, $ionicPopup, $state, $ionicH
                 //         reload: true
                 //     });
                 // }
+                //home =0
                 $state.go('app.home', {}, {
                     location: "replace",
                     reload: true
@@ -194,6 +210,7 @@ app.controller('loginCtrl', function($scope, $http, $ionicPopup, $state, $ionicH
 
 });
 app.controller('homeCtrl', function($scope, $http, $ionicPopup, $state, $ionicHistory, localStorageService) {
+
     //localStorageService.remove('id');
     if (localStorageService.get('id') == null) {
         $state.go('login', {}, {
@@ -201,10 +218,12 @@ app.controller('homeCtrl', function($scope, $http, $ionicPopup, $state, $ionicHi
             reload: true
         });
     }
+    
     $scope.role = localStorageService.get('role')
     $scope.data = {}
     $http({
         method: 'GET',
+        cache: false,
         url: api + "home/detail/" + localStorageService.get('id')+'/'+localStorageService.get('role'),
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -227,6 +246,7 @@ app.controller('paymentCtrl', function($scope, $http, $ionicPopup, $state, $ioni
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     $http({
         method: 'GET',
+        cache: false,
         url: api + "orders/payment/" + localStorageService.get('id'),
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -236,6 +256,18 @@ app.controller('paymentCtrl', function($scope, $http, $ionicPopup, $state, $ioni
     }).error(function(data, status, headers, config) {
         console.log(data)
     });
+});
+
+app.controller('singleorderCtrl', function($scope, $http, $ionicPopup, $state, $ionicHistory, localStorageService) {
+    //localStorageService.remove('id');
+    if (localStorageService.get('id') == null) {
+        $state.go('login', {}, {
+            location: "replace",
+            reload: true
+        });
+    }
+    $scope.order = localStorageService.get('order')
+    console.log($scope.order)
 });
 app.controller('orderformCtrl', function($scope, $http, $ionicPopup, $state, $ionicHistory, localStorageService) {
     //localStorageService.remove('id');
@@ -255,6 +287,7 @@ app.controller('orderformCtrl', function($scope, $http, $ionicPopup, $state, $io
         $scope.id = id
         $http({
             method: 'GET',
+            cache: false,
             url: api + "orders/form/" + id +'/'+localStorageService.get('id'),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -271,6 +304,7 @@ app.controller('orderformCtrl', function($scope, $http, $ionicPopup, $state, $io
         $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $http({
             method: 'POST',
+            cache: false,
             url: api + "orders/submit_order",
             data: {
                 'client': $scope.id,
@@ -285,7 +319,8 @@ app.controller('orderformCtrl', function($scope, $http, $ionicPopup, $state, $io
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).success(function(data, status, headers, config) {
-            $state.go('app.order', {}, {
+            localStorageService.set('order', data)
+            $state.go('app.singleorder', {}, {
                 location: "replace",
                 reload: true
             });
@@ -311,6 +346,7 @@ app.controller('clientCtrl', function($scope, $http, $ionicPopup, $state, $ionic
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     $http({
         method: 'GET',
+        cache: false,
         url: api + "orders/client/" + localStorageService.get('id'),
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -334,6 +370,7 @@ app.controller('orderCtrl', function($scope, $http, $ionicPopup, $state, $ionicH
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     $http({
         method: 'GET',
+        cache: false,
         url: api + "orders/index/" + localStorageService.get('id'),
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -356,6 +393,7 @@ app.controller('orderhistoryCtrl', function($scope, $http, $ionicPopup, $state, 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     $http({
         method: 'GET',
+        cache: false,
         url: api + "orders/history/" + localStorageService.get('id'),
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -378,6 +416,7 @@ app.controller('orderlistCtrl', function($scope, $http, $ionicPopup, $state, $io
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     $http({
         method: 'GET',
+        cache: false,
         url: api + "orders/client_order/" + localStorageService.get('id'),
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -408,6 +447,7 @@ app.controller('createorderCtrl', function($scope, $http, $ionicPopup, $state, $
         $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $http({
             method: 'POST',
+            cache: false,
             url: api + "orders/create_order",
             data: {
                 'quantity': $scope.item.quantity,
@@ -447,6 +487,7 @@ app.controller('detailCtrl', function($scope, $http, $ionicPopup, $state, $ionic
         $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $http({
             method: 'GET',
+            cache: false,
             url: api + "orders/detail/" + id,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -462,6 +503,7 @@ app.controller('detailCtrl', function($scope, $http, $ionicPopup, $state, $ionic
         $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $http({
             method: 'POST',
+            cache: false,
             url: api + "orders/deliver",
             data: {
                 'deliver': $scope.item.deliver,

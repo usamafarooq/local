@@ -8,14 +8,14 @@
   </ion-nav-title>
     <ion-content padding="'true'" class="has-header">
         <div>
-            <p>Total :
-                <strong>Rs.{{order.peyment}}</strong>
+            <p>Name :
+                <strong>{{order.name}}</strong>
             </p>
-            <p>Pending Bottles :
-                <strong>{{order.pending}}</strong>
+            <p>Code :
+                <strong>{{order.code}}</strong>
             </p>
         </div>
-		<button ng-click="deliver(item)" class="button button-positive button-block ">Deliver</button>
+		<!-- <button ng-click="deliver(item)" class="button button-positive button-block ">Deliver</button> -->
 		<div>
 			<div class="list card" >
 				<div class="item item-body">
@@ -23,21 +23,23 @@
 						<ion-list>
 				            <label class="item item-input">
 				                <span class="input-label">Deliver</span>
-				                <input ng-model="item.client" type="hidden" placeholder="" value="{{order.id}}">
-				                <input ng-model="item.rider" type="hidden" placeholder="" value="{{order.rider}}">
-				                <input ng-model="item.deliver" type="number" placeholder="" >
+				                <input ng-model="item.deliver" type="number" readonly="" placeholder=""  value="{{order.deliver}}">
 				            </label>
 				            <label class="item item-input">
 				                <span class="input-label">Received</span>
-				                <input ng-model="item.received" type="number" placeholder="">
+				                <input ng-model="item.received" type="number" readonly="" placeholder="" value="{{order.received}}">
 				            </label>
 				            <label class="item item-input">
-				                <span class="input-label">Amount</span>
-				                <input ng-model="item.amount" type="number" placeholder="">
+				                <span class="input-label">Balance</span>
+				                <input ng-model="item.price" type="number" readonly="" value="{{order.pending}}" placeholder="">
 				            </label>
 				            <label class="item item-input">
-				                <span class="input-label">Price</span>
-				                <input ng-model="item.price" type="number" readonly="" value="{{order.Price * item.deliver}}" placeholder="">
+				                <span class="input-label">Received</span>
+				                <input ng-model="item.amount" type="number" placeholder="" value="{{order.price}}">
+				            </label>
+				            <label class="item item-input">
+				                <span class="input-label">Balance</span>
+				                <input ng-model="item.price" type="number" readonly="" value="{{order.peyment}}" placeholder="">
 				            </label>
 				            <label class="item item-input">
 				                <span class="input-label">Date</span>
