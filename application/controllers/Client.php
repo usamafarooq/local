@@ -97,6 +97,13 @@ class Client extends MY_Controller{
 		$this->data['title'] = 'Orders';
 		$this->data['client'] = $this->Client_model->get_row_single('client',array('id'=>$id));
 		$this->data['orders'] = $this->Client_model->get_order_history($id);
+		for ($i=0; $i < sizeof($this->data['orders']); $i++) { 
+			$this->data['orders'][$i]['balance'] = $this->Client_model->get_pending($id,$this->data['orders'][$i]['date'])['pending'];
+			$payment = $this->Client_model->get_price($id,$this->data['orders'][$i]['date']);
+			$paid = $this->Client_model->get_peyment($id,$this->data['orders'][$i]['date']);
+			$this->data['orders'][$i]['balance_amount'] = $payment['price'] -  $paid['amount'];
+		}
+		//echo '<pre>';print_r($this->data['orders']);die;
 		$this->load->template('client/order',$this->data);
 	}
 
