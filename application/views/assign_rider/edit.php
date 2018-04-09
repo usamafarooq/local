@@ -50,13 +50,21 @@
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-3 col-form-label">Client<span class="required">*</span></label>
-                                <div class="col-sm-9">
+                                <!-- <div class="col-sm-9">
                                     <select class="form-control" name="Client[]" required="" multiple="">
                                         <option>Select Client</option>
                                         <?php foreach ($table_client as $t) {?>
                                         <option value="<?php echo $t["id"] ?>" <?php $client = explode(',', $assign_rider["Client"]); $key = array_search($t["id"], $client); if($key > -1) {if(array_key_exists($key, $client)) echo "selected";} ?>><?php echo $t["Name"] ?></option>
                                         <?php } ?>
                                     </select>
+                                </div> -->
+                                <div class="col-md-9">
+                                    <?php foreach ($table_client as $t) {?>
+                                    <div class="checkbox checkbox-info checkbox-inline">
+                                        <input type="checkbox"  name="Client[]" id="inlineCheckbox<?php echo $t["id"] ?>" value="<?php echo $t["id"] ?>" <?php $client = explode(',', $assign_rider["Client"]); $key = array_search($t["id"], $client); if($key > -1) {if(array_key_exists($key, $client)) echo "checked";} ?>>
+                                        <label for="inlineCheckbox<?php echo $t["id"] ?>"><?php echo $t["Name"] ?></label>
+                                    </div><br>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div class="form-group row">
