@@ -1,5 +1,6 @@
 var app = angular.module('local', ['ionic', 'LocalStorageModule']);
-var api = 'http://localhost/local/api/';
+//var api = 'http://localhost/local/api/';
+var api = 'http://naijabdc.com/local/api/';
 var home = 0
 app.run(function($state, $stateParams,$ionicPlatform) {
     $ionicPlatform.ready(function() {

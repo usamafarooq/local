@@ -53,6 +53,39 @@
 
                                     </div><div class="form-group row">
 
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Day</label>
+                                        <div class="col-sm-9">
+                                            <?php 
+                                                $days = array(
+                                                    1 => 'Monday',
+                                                    2 => 'Tuesday',
+                                                    3 => 'Wednesday',
+                                                    4 => 'Thursday',
+                                                    5 => 'Friday',
+                                                    6 => 'Saturday',
+                                                    7 => 'Sunday'
+                                                );
+                                            ?>
+                                            <select class="form-control" name="Day">
+                                                <option value="">Select Day</option>
+                                                <?php 
+                                                    $wd = '';
+                                                    for ($i = 1; $i <= 7; $i++)
+                                                    {
+                                                        $wd .= '<option value="'.$i.'"';
+                                                        // if ($i == $selected)
+                                                        // {
+                                                        //         $wd .= ' selected';
+                                                        // }
+                                                        $wd .= '>'.$days[$i].'</option>';
+                                                    }
+                                                    echo $wd;
+                                                ?>
+                                            </select>
+                                        </div>
+
+                                    </div><div class="form-group row">
+
                                 <label for="example-text-input" class="col-sm-3 col-form-label">Email</label>
                                         <div class="col-sm-9"><input class="form-control" name="Email" type="email" value="" id="example-text-input" placeholder="" ></div>
 

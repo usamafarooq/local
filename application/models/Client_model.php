@@ -55,9 +55,16 @@ class Client_model extends MY_Model{
 		return $this->db->get()->result_array();
 	}
 
-	public function get_rider_client($id,$date)
+	public function get_rider_client($id,$date,$day)
 	{
-		return $this->db->query("SELECT `client`.* FROM `assign_rider` JOIN `users` ON `users`.`id` = `assign_rider`.`Rider` JOIN `client` on find_in_set(client.id,assign_rider.Client) where Rider = ".$id." and Date = '".$date."'")->result_array();
+		///return $this->db->query("SELECT `client`.* FROM `assign_rider` JOIN `users` ON `users`.`id` = `assign_rider`.`Rider` JOIN `client` on find_in_set(client.id,assign_rider.Client) where Rider = ".$id." and Date = '".$date."'")->result_array();
+		$this->db->select('c.*,count(o.id) as total_o')
+				 ->from('client c')
+				 ->join('orders o',"c.id = o.Client and o.Date = '".$date."'",'left')
+				 ->group_by('c.id')
+				 ->where('c.Day', $day)
+				 ->having('total_o = 0');
+		return $this->db->get()->result_array();
 	}
 
 

@@ -22,7 +22,9 @@ class Orders extends CI_Controller{
 
 	public function client($id)
 	{
-		$data = $this->Client_model->get_rider_client($id,date('Y-m-d'));
+		$today = date("l"); 
+		//echo $today;die;
+		$data = $this->Client_model->get_rider_client($id,date('Y-m-d'),$today);
 		echo json_encode($data);
 	}
 
