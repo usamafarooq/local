@@ -39,7 +39,7 @@
 										<table id="dataTableExample2" class="table table-bordered table-striped table-hover">
 											<thead>
 												<tr>
-													<th>Id</th><th>Name</th><th>Address</th><th>Name</th><th>Quantity</th><th>Price</th><th>Date</th><?php 
+													<th>Id</th><th>Name</th><th>Address</th><th>Name</th><th>Quantity</th><th>Price</th><th>Date</th><th>Remarks</th><?php 
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
 													?>
 													<th>Action</th>
@@ -51,24 +51,24 @@
 										    		foreach ($orders as $module) {
 										    	?>
 												<tr>
-													<td><?php echo $module["id"] ?></td><td><?php echo $module["Name"] ?></td><td><?php echo $module["Address"] ?></td><td><?php echo $module["name"] ?></td><td><?php echo $module["Quantity"] ?></td><td><?php echo $module["Price"] ?></td><td><?php echo $module["Date"] ?></td><?php 
+													<td><?php echo $module["id"] ?></td><td><?php echo $module["Name"] ?></td><td><?php echo $module["Address"] ?></td><td><?php echo $module["name"] ?></td><td><?php echo $module["Quantity"] ?></td><td><?php echo $module["Price"] ?></td><td><?php echo $module["Date"] ?></td><td><?php echo $module["remarks"] ?></td><?php 
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
 													?>
 													<td>
 														<?php 
 															if ($module['sent'] == 0) {
 														?>
-														<a href="<?php echo base_url() ?>orders/deliver/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="Deliver Order" alt="Deliver Order" width="35" height="35"></a>
+														<a href="<?php echo base_url() ?>orders/deliver/<?php echo $module["id"] ?>"><button class="btn btn-info btn-circle material-ripple" title="Deliver Order"><i class="material-icons">local_shipping</i></button></a>
 														<?php } ?>
 														<?php 
 															if ($permission["edit"] == "1") {
 														?>
-														<a href="<?php echo base_url() ?>orders/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="35" height="35"></a>
+														<a href="<?php echo base_url() ?>orders/edit/<?php echo $module["id"] ?>"><button class="btn btn-info btn-circle material-ripple" title="Edit"><i class="material-icons">mode_edit</i></button></a>
 														<?php } ?>
 														<?php 
 															if ($permission["deleted"] == "1") {
 														?>
-		                                                <a href="<?php echo base_url() ?>orders/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a>
+		                                                <a href="<?php echo base_url() ?>orders/delete/<?php echo $module["id"] ?>"><button class="btn btn-danger btn-circle material-ripple" title="Delete"><i class="material-icons">delete_forever</i></button></a>
 		                                                <?php } ?>
 	                                                </td>
 	                                                <?php } ?>

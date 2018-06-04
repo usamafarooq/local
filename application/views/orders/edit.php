@@ -43,10 +43,10 @@
 
                                     </div><div class="form-group row">
 
-                                <label for="example-text-input" class="col-sm-3 col-form-label">Rider<span class="required">*</span></label>
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Sales person<span class="required">*</span></label>
                                         <div class="col-sm-9">
                                             <select class="form-control" name="Rider" required="">
-                                                <option>Select Rider</option><?php foreach ($table_users as $t) {?>
+                                                <option>Select Sales person</option><?php foreach ($table_users as $t) {?>
                                                     <option value="<?php echo $t["id"] ?>" <?php if($t["id"] == $orders["Rider"]) echo "selected" ?>><?php echo $t["name"] ?></option>
                                                <?php } ?></select>
                                         </div>
@@ -71,6 +71,13 @@
                                         <div class="col-sm-9">
 
                                         <input class="form-control" name="Date" type="date" value="<?php echo $orders["Date"] ?>" id="example-text-input" placeholder="" required=""></div>
+
+                                    </div><div class="form-group row">
+
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Remarks<span class="required">*</span></label>
+                                        <div class="col-sm-9">
+
+                                        <input class="form-control" name="remarks" type="text" value="<?php echo $orders["remarks"] ?>" id="example-text-input" placeholder="" required=""></div>
 
                                     </div><div class="form-group row">
 

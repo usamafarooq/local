@@ -24,7 +24,9 @@ class Orders extends CI_Controller{
 	{
 		$today = date("l"); 
 		//echo $today;die;
-		$data = $this->Client_model->get_rider_client($id,date('Y-m-d'),$today);
+		//$data = $this->Client_model->get_rider_client($id,date('Y-m-d'),$today);
+		$data = $this->Client_model->get_rider_client($id,'2018-06-08','Friday');
+		//print_r($this->db->last_query());
 		echo json_encode($data);
 	}
 
@@ -95,6 +97,7 @@ class Orders extends CI_Controller{
         	'Quantity' => $json['deliver'],
         	'Price' => $json['price'],
         	'Date' => $json['date'],
+        	'remarks' => $json['remarks'],
         	'user_id' => $json['rider'],
         );
         $order_id = $this->Orders_model->insert('orders',$data);

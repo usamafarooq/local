@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-3 col-form-label">Client<span class="required">*</span></label>
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Day<span class="required">*</span></label>
                                 <!-- <div class="col-sm-9">
                                     <select class="form-control" name="Client[]" required="" multiple="">
                                         <option>Select Client</option>
@@ -59,13 +59,51 @@
                                         <?php } ?>
                                     </select>
                                 </div> -->
-                                <div class="col-md-9">
+                                <!-- <div class="col-md-9">
                                     <?php foreach ($table_client as $t) {?>
                                     <div class="checkbox checkbox-info checkbox-inline">
                                         <input type="checkbox"  name="Client[]" id="inlineCheckbox<?php echo $t["id"] ?>" value="<?php echo $t["id"] ?>">
                                         <label for="inlineCheckbox<?php echo $t["id"] ?>"><?php echo $t["Name"] ?></label>
                                     </div><br>
                                     <?php } ?>
+                                </div> -->
+                                <div class="col-sm-9">
+                                    <?php 
+                                        $days = array(
+                                            1 => 'Monday',
+                                            2 => 'Tuesday',
+                                            3 => 'Wednesday',
+                                            4 => 'Thursday',
+                                            5 => 'Friday',
+                                            6 => 'Saturday',
+                                            7 => 'Sunday'
+                                        );
+                                    ?>
+                                    <select class="form-control not-select" name="Day">
+                                        <option value="">Select Day</option>
+                                        <?php 
+                                            $wd = '';
+                                            for ($i = 1; $i <= 7; $i++)
+                                            {
+                                                $wd .= '<option value="'.$days[$i].'"';
+                                                // if ($i == $selected)
+                                                // {
+                                                //         $wd .= ' selected';
+                                                // }
+                                                $wd .= '>'.$days[$i].'</option>';
+                                            }
+                                            echo $wd;
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Area<span class="required">*</span></label>
+                                <div class="col-sm-9">
+                                    <select class="form-control not-select" name="Area[]" required="" multiple="">
+                                        
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -88,3 +126,20 @@
 </div>
 <!-- /#wrapper -->
 <!-- START CORE PLUGINS -->
+<script type="text/javascript">
+    $('[name="Day"]').change(function() {
+        var day = $(this).val()
+        $.ajax({
+          url: "<?php echo base_url('client/area_day/') ?>"+day,
+          cache: false,
+          success: function(html){
+            html = JSON.parse(html)
+            console.log(html)
+            $('[name="Area[]"]').empty()
+            for (var i = 0; i < html.length; i++) {
+                $('[name="Area[]"]').append('<option value="'+html[i].area+'">'+html[i].area+'</option>')
+            }
+          }
+        });
+    })
+</script>

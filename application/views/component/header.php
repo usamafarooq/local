@@ -27,7 +27,9 @@
         <link href="<?php echo base_url() ?>admin_assets/assets/dist/css/custom.css" rel="stylesheet" type="text/css"/>
         <!-- multi select -->
         <link href="<?php echo  base_url()?>admin_assets/assets/plugins/amcharts/export.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url() ?>admin_assets/assets/plugins/select2/select2.css" rel="stylesheet" type="text/css"/>
 
+<link href="<?php echo base_url() ?>admin_assets/assets/dist/css/component_ui.min.css" rel="stylesheet" type="text/css"/>
 
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 

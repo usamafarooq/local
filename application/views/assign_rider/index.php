@@ -39,7 +39,7 @@
 										<table id="dataTableExample2" class="table table-bordered table-striped table-hover">
 											<thead>
 												<tr>
-													<th>Id</th><th>Date</th><th>Name</th><th>Name</th><?php 
+													<th>Id</th><th>Date</th><th>Sales Person</th><th>Day</th><th>Area</th><?php 
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
 													?>
 													<th>Action</th>
@@ -51,19 +51,19 @@
 										    		foreach ($assign_rider as $module) {
 										    	?>
 												<tr>
-													<td><?php echo $module["id"] ?></td><td><?php echo $module["Date"] ?></td><td><?php echo $module["name"] ?></td><td><?php echo $module["Name"] ?></td><?php 
+													<td><?php echo $module["id"] ?></td><td><?php echo $module["Date"] ?></td><td><?php echo $module["name"] ?></td><td><?php echo $module["Day"] ?></td><td><?php echo $module["Area"] ?></td><?php 
 														if ($permission["edit"] == "1" || $permission["deleted"] == "1"){
 													?>
 													<td>
 														<?php 
 															if ($permission["edit"] == "1") {
 														?>
-														<a href="<?php echo base_url() ?>assign_rider/edit/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="35" height="35"></a>
+														<!-- <a href="<?php echo base_url() ?>assign_rider/edit/<?php echo $module["id"] ?>"><button class="btn btn-info btn-circle material-ripple" title="Edit"><i class="material-icons">mode_edit</i></button></a> -->
 														<?php } ?>
 														<?php 
 															if ($permission["deleted"] == "1") {
 														?>
-		                                                <a href="<?php echo base_url() ?>assign_rider/delete/<?php echo $module["id"] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a>
+		                                                <a href="<?php echo base_url() ?>assign_rider/delete/<?php echo $module["id"] ?>"><button class="btn btn-danger btn-circle material-ripple" title="Delete"><i class="material-icons">delete_forever</i></button></a>
 		                                                <?php } ?>
 	                                                </td>
 	                                                <?php } ?>

@@ -6,14 +6,17 @@
   <ion-nav-title>
     Clients
   </ion-nav-title>
+
 	<ion-content padding class="categories">
-	    <ion-list ng-repeat="order in orders" >
+		<p><input type="text" ng-model="test" placeholder="Search Here"></p>
+	    <ion-list ng-repeat="order in orders | filter : test" >
 			<ion-item ui-sref="app.orderform({id:order.id})">
 				<p style="position:absolute;right:10px;">
 				
 				<h2  > {{order.Name}} </h2>
 				<p >Price: Rs:{{order.Price}}</p>
 				<p >Phone: {{order.Phone}}</p>
+				<p >Area: {{order.Area}}</p>
 			</ion-item>
         </ion-list>
 	</ion-content>

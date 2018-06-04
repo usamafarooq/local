@@ -47,7 +47,7 @@
                             <table id="" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Rider</th>
+                                        <th>Sales person</th>
                                         <th>Date</th>
                                         <th>Deliver</th>
                                         <th>Received</th>

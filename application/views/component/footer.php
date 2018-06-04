@@ -66,8 +66,10 @@
 
             });
         </script>
+        <script src="<?php echo base_url() ?>admin_assets/assets/plugins/select2/select2.js" type="text/javascript"></script>
         <script type="text/javascript">
  $(document).ready(function() {
+    $("select").not('.not-select').select2();
     $("body").on("click",".add-more",function(){
         var html = $(".after-add-more").first().clone();
         //  $(html).find(".change").prepend("<label for=''>&nbsp;</label><br/><a class='btn btn-danger remove'>- Remove</a>");
@@ -279,6 +281,32 @@ new Morris.Line({
         </script>
 
 
+<style type="text/css">
+    .btn-circle {
+    padding:  0;
+    font-size:  19px;
+    height:  30px;
+    width:  30px;
+    float:  left;
+    margin-right:  5px;
+    line-height:  30px;
+}
+.select2-container .select2-choice {
+    padding:  0;
+    border:  none;
+    background:  none;
+    margin-top:  -3px;
+}
 
+.select2-container .select2-choice .select2-arrow {
+    background:  none;
+    border:  none;
+}
+
+.select2-dropdown-open.select2-drop-above .select2-choice, .select2-dropdown-open.select2-drop-above .select2-choices {
+    border:  none;
+    background:  none;
+}
+</style>
 
 </html>

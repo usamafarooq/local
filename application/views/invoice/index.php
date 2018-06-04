@@ -11,11 +11,11 @@
                 <i class="pe-7s-note2"></i>
             </div>
             <div class="header-title">
-                <h1>Riders</h1>
+                <h1>Sales person</h1>
                 <small></small>
                 <ol class="breadcrumb">
                     <li><a href="index.html"><i class="pe-7s-home"></i> Home</a></li>
-                    <li class="active">Riders</li>
+                    <li class="active">Sales person</li>
                 </ol>
             </div>
         </div>
@@ -28,7 +28,7 @@
                     <div class="panel panel-bd ">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h4>Riders</h4>
+                                <h4>Sales person</h4>
                             </div>
                         </div>
                         <div class="panel-body">

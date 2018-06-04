@@ -23,7 +23,7 @@ class Daily_sales_report_model extends MY_Model{
 				 ->group_by('o.Client');
 		$price = $this->db->get_compiled_select();
 
-		$this->db->select('deliver,received as empty,C.name,c.Address,o.Price as amount, p.amount as received,pe.pending as balance,concat(pr.price - pa.amount) as balance_amount')
+		$this->db->select('deliver,received as empty,c.Name,c.Address,o.Price as amount, p.amount as received,pe.pending as balance,concat(pr.price - pa.amount) as balance_amount')
 				 ->from('orders o')
 				 ->join('deliver_order do', 'do.order_id = o.id')
 				 ->join('client c', 'c.id = o.Client')

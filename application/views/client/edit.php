@@ -61,6 +61,21 @@
 
                                     </div><div class="form-group row">
 
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Deposit</label>
+                                        <div class="col-sm-9"><input class="form-control" name="deposit" type="number" value="<?php echo $client["deposit"] ?>" id="example-text-input" placeholder="" ></div>
+
+                                    </div><div class="form-group row">
+
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Deposit Date</label>
+                                        <div class="col-sm-9"><input class="form-control" name="deposit_date" type="date" value="<?php echo $client["deposit_date"] ?>" id="example-text-input" placeholder="" ></div>
+
+                                    </div><div class="form-group row">
+
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Area</label>
+                                        <div class="col-sm-9"><input class="form-control" name="area" type="text" value="<?php echo $client["area"] ?>" id="example-text-input" placeholder="" ></div>
+
+                                    </div><div class="form-group row">
+
                                 <label for="example-text-input" class="col-sm-3 col-form-label">Day</label>
                                         <div class="col-sm-9">
                                             <?php 

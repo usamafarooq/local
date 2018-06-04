@@ -17,8 +17,29 @@ class Client extends MY_Controller{
 			redirect('home');
 		}
 		$this->data['title'] = 'Client';
-		if ( $this->permission['view_all'] == '1'){$this->data['client'] = $this->Client_model->all_rows('client');}
-		elseif ($this->permission['view'] == '1') {$this->data['client'] = $this->Client_modelget_rows('client',array('user_id'=>$this->id));}
+		$day = '';
+		if ($this->input->post()) {
+			//print_r($this->input->post());die;
+			$day = $this->input->post('Day');
+			$this->data['day'] = $day;
+		}
+		if ( $this->permission['view_all'] == '1'){
+			if ($day) {
+				$this->data['client'] = $this->Client_model->get_rows('client',array('Day'=>$day));
+			}
+			else{
+				$this->data['client'] = $this->Client_model->all_rows('client');
+			}
+			
+		}
+		elseif ($this->permission['view'] == '1') {
+			if ($day) {
+				$this->data['client'] = $this->Client_model->get_rows('client',array('Day'=>$day,'user_id'=>$this->id));
+			}
+			else{
+				$this->data['client'] = $this->Client_model->get_rows('client',array('user_id'=>$this->id));
+			}
+		}
 		$this->data['permission'] = $this->permission;
 		$this->load->template('client/index',$this->data);
 	}
@@ -138,5 +159,12 @@ class Client extends MY_Controller{
 		usort($this->data['history'], 'compareOrder');
 		//echo '<pre>';print_r($this->data['history']);die;
 		$this->load->template('client/payment',$this->data);
+	}
+
+	public function area_day($day)
+	{
+		$area = $this->Client_model->get_area_day($day);
+		//print_r($this->db->last_query());
+		echo json_encode($area);
 	}
 }

@@ -1,6 +1,7 @@
 var app = angular.module('local', ['ionic', 'LocalStorageModule']);
 //var api = 'http://localhost/local/api/';
-var api = 'http://naijabdc.com/local/api/';
+//var api = 'http://naijabdc.com/local/api/';
+var api = 'http://webewox.com/local/api/';
 var home = 0
 app.run(function($state, $stateParams,$ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -18,11 +19,13 @@ app.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvi
     $stateProvider.state('login', {
             url: '/login',
             templateUrl: 'templates/login.html',
-            controller: 'loginCtrl'
+            controller: 'loginCtrl',
+            cache: false
         }).state('main', {
             url: '/',
             templateUrl: 'templates/login.html',
-            controller: 'loginCtrl'
+            controller: 'loginCtrl',
+            cache: false
         }).state('app.detail', {
             url: '/detail/:id',
             views: {
@@ -30,7 +33,8 @@ app.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvi
                     templateUrl: 'templates/detail.html',
                     controller: 'detailCtrl'
                 }
-            }
+            },
+            cache: false
         }).state('app.order-list', {
             url: '/order-list',
             views: {
@@ -38,7 +42,8 @@ app.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvi
                     templateUrl: 'templates/order-list.html',
                     controller: 'orderlistCtrl'
                 }
-            }
+            },
+            cache: false
         }).state('app.create-order', {
             url: '/create-order',
             views: {
@@ -46,12 +51,14 @@ app.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvi
                     templateUrl: 'templates/create-order.html',
                     controller: 'createorderCtrl'
                 }
-            }
+            },
+            cache: false
         }).state('app', {
             url: '/app',
             abstract: true,
             templateUrl: 'templates/menu.html',
-            controller: 'AppCtrl'
+            controller: 'AppCtrl',
+            cache: false
         }).state('app.order', {
             url: '/order',
             views: {
@@ -59,7 +66,8 @@ app.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvi
                     templateUrl: 'templates/order.html',
                     controller: 'orderCtrl'
                 }
-            }
+            },
+            cache: false
         }).state('app.client', {
             url: '/client',
             views: {
@@ -67,7 +75,8 @@ app.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvi
                     templateUrl: 'templates/client.html',
                     controller: 'clientCtrl'
                 }
-            }
+            },
+            cache: false
         }).state('app.orderform', {
             url: '/orderform/:id',
             views: {
@@ -75,7 +84,8 @@ app.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvi
                     templateUrl: 'templates/orderform.html',
                     controller: 'orderformCtrl'
                 }
-            }
+            },
+            cache: false
         }).state('app.singleorder', {
             url: '/singleorder/',
             views: {
@@ -83,7 +93,8 @@ app.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvi
                     templateUrl: 'templates/singleorder.html',
                     controller: 'singleorderCtrl'
                 }
-            }
+            },
+            cache: false
         }).state('app.home', {
             url: '/home',
             views: {
@@ -91,7 +102,8 @@ app.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvi
                     templateUrl: 'templates/home.html',
                     controller: 'homeCtrl'
                 }
-            }
+            },
+            cache: false
         }).state('app.order-history', {
             url: '/order-history',
             views: {
@@ -99,7 +111,8 @@ app.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvi
                     templateUrl: 'templates/order-history.html',
                     controller: 'orderhistoryCtrl'
                 }
-            }
+            },
+            cache: false
         }).state('app.payment', {
             url: '/payment',
             views: {
@@ -107,7 +120,8 @@ app.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvi
                     templateUrl: 'templates/payment.html',
                     controller: 'paymentCtrl'
                 }
-            }
+            },
+            cache: false
         });
     $urlRouterProvider.otherwise('/login');
 
@@ -314,7 +328,8 @@ app.controller('orderformCtrl', function($scope, $http, $ionicPopup, $state, $io
                 'received': $scope.item.received,
                 'amount': $scope.item.amount,
                 'price': ($scope.order.Price * $scope.item.deliver),
-                'date': $scope.order.date
+                'date': $scope.order.date,
+                'remarks': $scope.order.remarks
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

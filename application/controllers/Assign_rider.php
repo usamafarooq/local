@@ -39,7 +39,7 @@
 			}
 			$data = $this->input->post();
 			$data['user_id'] = $this->session->userdata('user_id');
-			$data['Client'] = implode(',', $data['Client']);
+			$data['Area'] = implode(',', $data['Area']);
 			$id = $this->Assign_rider_model->insert('assign_rider',$data);
 			if ($id) {
 				redirect('assign_rider');
